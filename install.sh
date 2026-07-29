@@ -48,12 +48,31 @@ tar -xzf "$TMP/forge-ui.tar.gz" -C "$STAGE"
 if [ -d "$TARGET" ]; then
     [ -f "$TARGET/config.json" ] && cp -a "$TARGET/config.json" "$STAGE/config.json"
     [ -d "$TARGET/oe" ] && cp -a "$TARGET/oe" "$STAGE/oe"
-    mv "$TARGET" "$BACKUP"
 else
     mkdir -p "$(dirname "$TARGET")"
     BACKUP="none (fresh install)"
 fi
 
+# Keep printer-local connection settings but select the light mode FORGE was
+# designed and contrast-tested against. Klipper hosts already provide Python 3.
+if [ -f "$STAGE/config.json" ] && command -v python3 >/dev/null; then
+    python3 - "$STAGE/config.json" <<'PY'
+import json
+import sys
+
+path = sys.argv[1]
+with open(path, encoding="utf-8") as handle:
+    config = json.load(handle)
+config["defaultMode"] = "light"
+with open(path, "w", encoding="utf-8") as handle:
+    json.dump(config, handle, indent=4)
+    handle.write("\n")
+PY
+fi
+
+if [ -d "$TARGET" ]; then
+    mv "$TARGET" "$BACKUP"
+fi
 mv "$STAGE" "$TARGET"
 chmod -R a+rX "$TARGET"
 
