@@ -7,7 +7,7 @@ A RatRig-focused Mainsail v2.18.2 fork with an operator-first dashboard, liquid-
 Run this on the printer host as its normal Klipper user:
 
 ```bash
-bash -c "$(curl -fsSL https://raw.githubusercontent.com/cluzl/ratrig3-forge-ui/main/install.sh)"
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/cluzl/ratrig3-forge-ui/77a11e2719f5f383805a358c550f4ba3b071cb4a/install.sh)"
 ```
 
 The installer:
@@ -22,7 +22,7 @@ The installer:
 If Mainsail lives elsewhere:
 
 ```bash
-FORGE_UI_TARGET=/path/to/mainsail bash -c "$(curl -fsSL https://raw.githubusercontent.com/cluzl/ratrig3-forge-ui/main/install.sh)"
+FORGE_UI_TARGET=/path/to/mainsail bash -c "$(curl -fsSL https://raw.githubusercontent.com/cluzl/ratrig3-forge-ui/77a11e2719f5f383805a358c550f4ba3b071cb4a/install.sh)"
 ```
 
 ## Rollback
